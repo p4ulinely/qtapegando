@@ -2,10 +2,5 @@ roxo 7A59DE (logo)
 verde1 2CDE9D (logo)
 verde2 43DEA5
 
-verda success bootstrap 198754
+verde success bootstrap 198754
 
-style=\"justify-content: center; align-items: center; flex-direction: row;\"
-<div class=\"col-xs-12 col-sm-7\">
-<p class=\"fs-4\">
- style=\"margin-left: 10px;\"
-style=\"float: left;\"
