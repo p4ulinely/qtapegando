@@ -1,0 +1,84 @@
+hr.styleTwo {
+    border-top: 3px solid #198754;
+}
+
+h1 {
+    font-size: 30px;
+}
+h2 {
+    font-size: 25px;
+}
+h3 {
+    font-size: 25px;
+}
+h5 {
+    font-size: 18px;
+}
+
+.stringMaisBuscada{
+    font-size: 18px;
+}
+
+@media all and (max-device-width: 720px){
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 35px;
+    }
+    h3 {
+        font-size: 32px;
+    }
+    h5, .stringMaisBuscada  {
+        font-size: 20px;
+    }
+}
+
+@media all and (max-device-width: 640px){
+    h1 {
+        font-size: 50px;
+    }
+    h2 {
+        font-size: 45px;
+    }
+    h3 {
+        font-size: 40px;
+    }
+    h5, .stringMaisBuscada {
+        font-size: 35px;
+    }
+}
+
+@media all and (max-device-width: 320px){
+    h1 {
+        font-size: 60px;
+    }
+    h2 {
+        font-size: 55px;
+    }
+    h3 {
+        font-size: 48px;
+    }
+    h5, .stringMaisBuscada  {
+        font-size: 39px;
+    }
+}
+
+.tagArea {
+    /* background-color: rgb(199, 233, 230); */
+    flex-direction: column;
+}
+
+.tagButton {
+    font-size: 13px;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+
+/* .navbar .sticky-top {
+    flex-direction: column; 
+    background-color: #FFF; 
+    justify-content: center; 
+    align-items: flex-end; 
+    border-bottom: 2px solid #198754;
+} */
