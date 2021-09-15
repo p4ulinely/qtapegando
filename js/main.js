@@ -1,20 +1,38 @@
 let bodyTrendStrings = document.querySelector('#bodyTrendsNews #top');
 let bodyVitrineNews = document.querySelector('#bodyTrendsNews #mid');
 let bodyTrendsNews = document.querySelector('#bodyTrendsNews #bottom');
-let carregando = "<br><div class='text-center'><div class='spinner-border text-success' style='width: 3rem; height: 3rem;' role='status'><span class='sr-only'></span></div></div>";
 
 window.onload = function() {
-    bodyVitrineNews.innerHTML = carregando;
-    bodyTrendStrings.innerHTML = carregando;
-    bodyTrendsNews.innerHTML = carregando;
+    const qsCategory = escape(getParameterByName("category"));
+    const categories = ["e", "b", "t", "m", "s"];
+
+    if (categories.indexOf(qsCategory) !== -1) {
+        bodyTrendStrings.innerHTML = getLoadingHtml("dark");
+        bodyTrendsNews.innerHTML = getLoadingHtml();
+        
+        preencherComTrendStrings(qsCategory);
+        preencherComTrendNews(qsCategory);
+
+        return null;
+    }
+
+    bodyTrendStrings.innerHTML = getLoadingHtml("dark");
+    bodyVitrineNews.innerHTML = getLoadingHtml();
+    bodyTrendsNews.innerHTML = getLoadingHtml();
 
     preencherComTrendStrings();
     preencherComVitrineNews();
     preencherComTrendNews();
 };
 
-async function preencherComTrendStrings() {
-    let response = await getRealTimeTrends();
+function getLoadingHtml(color = "success") {
+    let carregando = "<br><div class='text-center'><div class='spinner-border text-"+color+"' style='width: 3rem; height: 3rem;' role='status'><span class='sr-only'></span></div></div>";
+
+    return carregando;
+}
+
+async function preencherComTrendStrings(category = "h") {
+    let response = await getRealTimeTrends(category);
 
     if (response.length < 1) {
         bodyTrendsNews.innerHTML = "Nenhum trend econtrado.";
@@ -35,7 +53,8 @@ async function preencherComTrendStrings() {
         // stringsToDisplay.push(...trendTitles); //todos
     }
 
-    let trendStringsHtml = "<div id=\"trendStringsArea\"><h5 class=\"text-dark\">Mais buscados em tempo real: </h5>";
+    const subject = category !== "h" ? " ("+ getSubjectName(category) +")" : "";
+    let trendStringsHtml = "<div id=\"trendStringsArea\"><h5 class=\"text-dark\">Mais buscados em tempo real" + subject + ": </h5>";
 
     for (const str of stringsToDisplay) {
         const regx = new RegExp(' ', 'g');
@@ -44,7 +63,7 @@ async function preencherComTrendStrings() {
         trendStringsHtml += "<a href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 10px; margin-top: 10px; \" >" + str + "</a>";
     }
 
-    trendStringsHtml += "</div>";
+    trendStringsHtml += "</div><br><hr class=\"styleTwo\">";
 
     bodyTrendStrings.innerHTML = trendStringsHtml;               
 }
@@ -77,7 +96,7 @@ async function preencherComVitrineNews() {
             let primeiraNoticiaDoTrend = item.articles[0];
             
             vitrineNews += "<div class=\"col\" >";
-            vitrineNews += "<div class=\"card border-1 bg-light\" style=\" margin-top:5px;\">";
+            vitrineNews += "<div class=\"card border-2 bg-light\" style=\" margin-top:5px;\">";
 
             if (imgsTrend.length > 1) {
                 vitrineNews += "<div style=\"flex-direction: row;\"><a target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\">";
@@ -106,7 +125,7 @@ async function preencherComVitrineNews() {
             vitrineNews += "</div>";
 
             if (controle) {
-                vitrineNews += "</div>";
+                vitrineNews += "</div><hr class=\"styleTwo\">";
                 break;
             }
             
@@ -115,21 +134,21 @@ async function preencherComVitrineNews() {
     }
 
     bodyVitrineNews.innerHTML = vitrineNews;
-};
+}
 
-async function preencherComTrendNews() {
+async function preencherComTrendNews(category = "h") {
     // const types = ["e", "b", "t", "m", "s", "h"];
     // const idxChoosenType = Math.floor(Math.random() * types.length);
 
-    let response = await getRealTimeTrends("h");
+    let response = await getRealTimeTrends(category);
 
     if (response.length < 1) {
         bodyTrendsNews.innerHTML = "Nenhum trend econtrado.";
         return null;
     }
 
-    let noticias = "<h5 class=\"text-info\">Relacionadas a temas em tempo real: </h5>";
-    
+    let noticias = "<h5 class=\"text-info\">Relacionadas a " + getSubjectName(category) + " em tempo real: </h5>";
+
     noticias += "<div class=\"container-fluid \">";
     noticias += "<div class=\"row\" >";
 
@@ -138,10 +157,10 @@ async function preencherComTrendNews() {
             let srcImgPrincipal = "http:" + item.image.imgUrl;
             let primeiraNoticiaDoTrend = item.articles[0];
 
-            noticias += "<div style=\"margin-top: 30px;\" class=\"col-md-12 col-lg-6 bg-light\"><br>"
+            noticias += "<div style=\"margin-top: 30px;\" class=\"col-md-12 col-lg-6 bg-light rounded\"><br>"
             
             let img = "<div style=\"float: left; margin-right: 10px;\"><a target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\"><img src=\"" + srcImgPrincipal + "\" class=\"rounded img-thumbnail\" /></a></div>";
-            let title = "<h2><a class=\"text-decoration-none fw-bold text-info\" target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\">" + primeiraNoticiaDoTrend.articleTitle + "</a></h2>";
+            let title = "<h2><a class=\"text-decoration-none fw-bold text-info \" target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\">" + primeiraNoticiaDoTrend.articleTitle + "</a></h2>";
             let timeAndSource = "<span class=\"badge bg-secondary text-wrap\">" + primeiraNoticiaDoTrend.source + "</span> · <span class=\"text-muted\"> " + primeiraNoticiaDoTrend.time + "</span>";
             // let entities = "<span class=\"text-success\"> " + item.entityNames.join("</span> · <span class=\"text-success \" >") + "</span>";
 
@@ -154,7 +173,7 @@ async function preencherComTrendNews() {
     noticias += "</div>";
 
     bodyTrendsNews.innerHTML = noticias;
-};
+}
 
 async function getYesterdayTrends() {
     let result = [];
@@ -175,7 +194,7 @@ async function getYesterdayTrends() {
     return result;
 }
 
-async function getRealTimeTrends(category = "all") {
+async function getRealTimeTrends(category = "h") {
     let result = [];
 
     try {
@@ -213,4 +232,29 @@ function api(url, verb='GET') {
 			}
 		};
 	});
-};
+}
+
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    
+    if (!results) return null;
+    if (!results[2]) return '';
+
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function getSubjectName(category) {
+    const categoryName = {
+        all: "tudo",
+        e: "entretenimento",
+        b: "negócios",
+        t: "ciência/tecnologia",
+        m: "saúde",
+        s: "esportes",
+        h: "temas", //top stories
+    }
+    
+    return categoryName[category];
+}
