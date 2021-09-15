@@ -1,3 +1,8 @@
+body {
+    background-color: #f1f1f1;
+    
+}
+
 hr.styleTwo {
     border-top: 3px solid #198754;
 }
@@ -64,9 +69,9 @@ h5 {
     }
 }
 
-.tagArea {
-    /* background-color: rgb(199, 233, 230); */
-    flex-direction: column;
+.linkArea {
+    background-color: #000;
+    flex-direction: row;
 }
 
 .tagButton {
