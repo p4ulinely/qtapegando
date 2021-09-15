@@ -60,7 +60,7 @@ async function preencherComTrendStrings(category = "h") {
         const regx = new RegExp(' ', 'g');
         const strToSearchOnGoogle = str.replace(regx, '+');
 
-        trendStringsHtml += "<a href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 10px; margin-top: 10px; \" >" + str + "</a>";
+        trendStringsHtml += "<a target=\"_blank\" href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 10px; margin-top: 10px; \" >" + str + "</a>";
     }
 
     trendStringsHtml += "</div><br><hr class=\"styleTwo\">";
@@ -159,13 +159,13 @@ async function preencherComTrendNews(category = "h") {
 
             noticias += "<div style=\"margin-top: 30px;\" class=\"col-md-12 col-lg-6 bg-light rounded\"><br>"
             
-            let img = "<div style=\"float: left; margin-right: 10px;\"><a target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\"><img src=\"" + srcImgPrincipal + "\" class=\"rounded img-thumbnail\" /></a></div>";
-            let title = "<h2><a class=\"text-decoration-none fw-bold text-info \" target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\">" + primeiraNoticiaDoTrend.articleTitle + "</a></h2>";
+            let img = "<a target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\"><img src=\"" + srcImgPrincipal + "\" class=\"rounded img-thumbnail\" /></a>";
             let timeAndSource = "<span class=\"badge bg-secondary text-wrap\">" + primeiraNoticiaDoTrend.source + "</span> · <span class=\"text-muted\"> " + primeiraNoticiaDoTrend.time + "</span>";
+            let title = "<h2><a class=\"text-decoration-none fw-bold text-info \" target=\"_blank\" href=\"" + primeiraNoticiaDoTrend.url + "\">" + primeiraNoticiaDoTrend.articleTitle + "</a></h2>";
             // let entities = "<span class=\"text-success\"> " + item.entityNames.join("</span> · <span class=\"text-success \" >") + "</span>";
 
-            noticias += img + title + "<h5>" + timeAndSource + "" + "</h5>" ;
-            noticias += "<br></div>";
+            noticias += "<div style=\"float: left; margin-right: 10px;\">" + img + "</div>" + "<h5>" + timeAndSource + "</h5><br>" + title;
+            noticias += "</div>";
         } catch (error) { continue; }
     }
 

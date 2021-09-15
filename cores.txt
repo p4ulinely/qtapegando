@@ -4,3 +4,13 @@ verde2 43DEA5
 
 verde success bootstrap 198754
 
+flex-direction: column; justify-content: center; 
+
+float: left;
+flex-direction: column; 
+
+display: inline-block; position: absolute;
+
+flex-direction: column; justify-content: center; align-items: center;
+
+float:left !important; display: inline;

@@ -12,27 +12,27 @@
     </head>
     <body>
         <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="flex-direction: column; background-color: #FFFFFF;  border-bottom: 2px solid #198754;">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" stype="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse font-weight-normal" id="navbarNavDropdown" style="margin-top: 10px;">
+            
+            <div>
+                <a class="" href="/">
+                    <img class="img-fluid" src="./imgs/logo_100x360.png" />
+                </a> 
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-top: 10px;">
                 <h5><a class="nav-link text-success" href="?category=b">Negócios</a></h5>
                 <h5><a class="nav-link text-success" href="?category=t">Ciência/Tecnologia</a></h5>
                 <h5><a class="nav-link text-success" href="?category=m">Saúde</a></h5>
                 <h5><a class="nav-link text-success" href="?category=s">Esportes</a></h5>
                 <h5><a class="nav-link text-success" href="?category=e">Entretenimento</a></h5>
-                <!-- <ul class="nav navbar-nav">
-                    <li class="nav-item">
-                        
-                    </li>
-                </ul> -->
                 <form class="container-fluid">
                     <button type="button" class="btn btn-outline-success"><h5>Entrar</h5></button>
                 </form>
             </div>
-            <a class="navbar-brand" href="/">
-                <img class="img-fluid" src="./imgs/logo_100x360.png" alt="" />
-            </a>            
+                       
         </nav>
 
         <div class="container-fluid">
@@ -47,16 +47,19 @@
                 <div class="col-6 col-lg-3">
                     <div class="row">
                         <br>
-                        <hr class="styleTwo">
-                        <div id="linksArea" class="col">
-                            <a class="text-success" href="#">Ajuda</a>
-                            <a class="text-success" href="#">Sobre nós</a>
-                            <a class="text-success" href="#">Termos</a>
-                            <a class="text-success" href="#">Contato</a>
-                        </div>
+                        
+                        
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="container" >
+            <hr class="styleTwo">
+            <div class="footerLink"><h5><a class="text-success" href="#">Ajuda</a></h5></div>
+            <div class="footerLink"><h5><a class="text-success" href="#">Sobre nós</a></h5></div>
+            <div class="footerLink"><h5><a class="text-success" href="#">Termos</a></h5></div>
+            <div class="footerLink"><h5><a class="text-success" href="#">Contato</a></h5></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>

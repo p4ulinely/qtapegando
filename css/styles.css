@@ -7,6 +7,22 @@ hr.styleTwo {
     border-top: 3px solid #198754;
 }
 
+.footerLink {
+    float: left; 
+    margin-left: 20px; 
+    margin-bottom: 20px; 
+}
+
+.navbar-toggler {
+    position: absolute; 
+    left: 20px;
+    top: 30px;
+}
+
+.navbar-toggler-icon {
+    font-size:35px;
+}
+
 h1 {
     font-size: 30px;
 }
