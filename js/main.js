@@ -185,8 +185,9 @@ async function getYesterdayTrends() {
         ontem.setDate(ontem.getDate() - 1);
         ontem = ontem.toLocaleDateString('en-US').replace(regx, '-');
     
-        let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tendenciasDia?geo=BR&date=" + ontem + "&hl=pt_BR";
-        result = await api(base);
+        //let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tendenciasDia?geo=BR&date=" + ontem + "&hl=pt_BR";
+        let base = "https://dailytrendsbyregion-vneyowobya-uc.a.run.app?geo=BR&date=" + ontem + "&hl=pt_BR";
+		result = await api(base);
     } catch (error) {
         console.error(err);
     }
@@ -198,8 +199,9 @@ async function getRealTimeTrends(category = "h") {
     let result = [];
 
     try {
-        let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tempoReal?geo=BR&category=" + category + "&hl=pt_BR";
-        result = await api(base);
+        //let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tempoReal?geo=BR&category=" + category + "&hl=pt_BR";
+        let base = "https://realtimetrendsbyregion-vneyowobya-uc.a.run.app?geo=BR&category=" + category + "&hl=pt_BR";
+		result = await api(base);
     } catch (error) {
         console.error(err);
     }
