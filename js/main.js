@@ -64,7 +64,7 @@ async function preencherComTrendStrings(category = "h") {
         const regx = new RegExp(' ', 'g');
         const strToSearchOnGoogle = str.replace(regx, '+');
 
-        trendStringsHtml += "<a target=\"_blank\" href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 5px; margin-top: 5px; \" >" + str + "</a>";
+        trendStringsHtml += "<a target=\"_blank\" href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 10px; margin-top: 10px; \" >" + str + "</a>";
     }
 
     trendStringsHtml += "</div><br><hr class=\"styleTwo\">";
@@ -221,11 +221,11 @@ async function preencherComTrendsTwitter(){
         return null;
     }
 
-    let trendsTwitterHtml = "<div id=\"trendStringsArea\"><h5 class=\"text-info\">Trendig topics twitter: </h5>";
+    let trendsTwitterHtml = "<div id=\"\"><h5 class=\"text-info\">Trendig topics: </h5>";
 
     for (const item of result) {
         try {
-            trendsTwitterHtml += "<a target=\"_blank\" href=\"" + item.url + "\" class=\"btn btn-outline-info btn-lg \" style=\"margin-left: 5px; margin-top: 5px; \" >" + item.titulo + "</a>";
+            trendsTwitterHtml += "<a target=\"_blank\" href=\"" + item.url + "\" class=\"btn btn-outline-info btn-lg stringTrendingTopics \" style=\"margin-left: 10px; margin-top: 10px; \" >" + item.titulo + "</a>";
         } catch (err) { 
             continue;
         }

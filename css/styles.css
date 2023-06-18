@@ -36,7 +36,7 @@ h5 {
     font-size: 18px;
 }
 
-.stringMaisBuscada{
+.stringMaisBuscada, .stringTrendingTopics {
     font-size: 18px;
 }
 
@@ -50,7 +50,7 @@ h5 {
     h3 {
         font-size: 32px;
     }
-    h5, .stringMaisBuscada  {
+    h5, .stringMaisBuscada, .stringTrendingTopics {
         font-size: 20px;
     }
 }
@@ -65,7 +65,7 @@ h5 {
     h3 {
         font-size: 40px;
     }
-    h5, .stringMaisBuscada {
+    h5, .stringMaisBuscada, .stringTrendingTopics {
         font-size: 35px;
     }
 }
@@ -80,7 +80,7 @@ h5 {
     h3 {
         font-size: 48px;
     }
-    h5, .stringMaisBuscada  {
+    h5, .stringMaisBuscada, .stringTrendingTopics {
         font-size: 39px;
     }
 }
