@@ -1,4 +1,5 @@
 let bodyTrendStrings = document.querySelector('#bodyTrendsNews #top');
+let bodyTrendTwitter = document.querySelector('#bodyTrendsNews #twitter');
 let bodyVitrineNews = document.querySelector('#bodyTrendsNews #mid');
 let bodyTrendsNews = document.querySelector('#bodyTrendsNews #bottom');
 
@@ -6,6 +7,7 @@ window.onload = function() {
     const qsCategory = escape(getParameterByName("category"));
     const categories = ["e", "b", "t", "m", "s"];
 
+    // load quando for a home
     if (categories.indexOf(qsCategory) !== -1) {
         bodyTrendStrings.innerHTML = getLoadingHtml("dark");
         bodyTrendsNews.innerHTML = getLoadingHtml();
@@ -17,10 +19,12 @@ window.onload = function() {
     }
 
     bodyTrendStrings.innerHTML = getLoadingHtml("dark");
+    bodyTrendTwitter.innerHTML = getLoadingHtml("info");
     bodyVitrineNews.innerHTML = getLoadingHtml();
     bodyTrendsNews.innerHTML = getLoadingHtml();
 
     preencherComTrendStrings();
+    preencherComTrendsTwitter();
     preencherComVitrineNews();
     preencherComTrendNews();
 };
@@ -60,7 +64,7 @@ async function preencherComTrendStrings(category = "h") {
         const regx = new RegExp(' ', 'g');
         const strToSearchOnGoogle = str.replace(regx, '+');
 
-        trendStringsHtml += "<a target=\"_blank\" href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 10px; margin-top: 10px; \" >" + str + "</a>";
+        trendStringsHtml += "<a target=\"_blank\" href=\"https://www.google.com.br/search?q=" + strToSearchOnGoogle + "\" class=\"btn btn-outline-dark btn-lg stringMaisBuscada\" style=\"margin-left: 5px; margin-top: 5px; \" >" + str + "</a>";
     }
 
     trendStringsHtml += "</div><br><hr class=\"styleTwo\">";
@@ -188,7 +192,7 @@ async function getYesterdayTrends() {
         //let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tendenciasDia?geo=BR&date=" + ontem + "&hl=pt_BR";
         let base = "https://dailytrendsbyregion-vneyowobya-uc.a.run.app?geo=BR&date=" + ontem + "&hl=pt_BR";
 		result = await api(base);
-    } catch (error) {
+    } catch (err) {
         console.error(err);
     }
 
@@ -202,11 +206,53 @@ async function getRealTimeTrends(category = "h") {
         //let base = "https://tools-mkt-data.herokuapp.com/v1/gtrends/tempoReal?geo=BR&category=" + category + "&hl=pt_BR";
         let base = "https://realtimetrendsbyregion-vneyowobya-uc.a.run.app?geo=BR&category=" + category + "&hl=pt_BR";
 		result = await api(base);
-    } catch (error) {
+    } catch (err) {
         console.error(err);
     }
 
     return result;
+}
+
+async function preencherComTrendsTwitter(){
+    let result = await getTwitterTrendsBrazil();
+
+    if (result.length < 1) {
+        bodyTrendTwitter.innerHTML = "Nenhum trend econtrado para twitter.";
+        return null;
+    }
+
+    let trendsTwitterHtml = "<div id=\"trendStringsArea\"><h5 class=\"text-info\">Trendig topics twitter: </h5>";
+
+    for (const item of result) {
+        try {
+            trendsTwitterHtml += "<a target=\"_blank\" href=\"" + item.url + "\" class=\"btn btn-outline-info btn-lg \" style=\"margin-left: 5px; margin-top: 5px; \" >" + item.titulo + "</a>";
+        } catch (err) { 
+            continue;
+        }
+    }
+
+    trendsTwitterHtml += "</div><br><hr class=\"styleTwo\">";
+
+    bodyTrendTwitter.innerHTML = trendsTwitterHtml;
+}
+
+async function getTwitterTrendsBrazil(top) {
+    let result = [];
+
+    try {
+        let base = "https://gettwittertrendsbyregion-vneyowobya-uc.a.run.app";
+		result = await api(base);
+
+        if (result.length < 1)
+            return [];
+
+        top = top || 10;
+        top = top > result.length ? result.length : top;
+
+        return result.slice(0, top);
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 function api(url, verb='GET') {
