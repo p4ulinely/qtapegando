@@ -154,7 +154,7 @@ async function preencherComTrendNews(category = "h") {
 
     for (const item of response) {
         try {
-            let srcImgPrincipal = "http:" + item.image.imgUrl;
+            let srcImgPrincipal = item.image.imgUrl;
             let primeiraNoticiaDoTrend = item.articles[0];
 
             noticias += "<div style=\"margin-top: 30px;\" class=\"col-md-12 col-lg-6 bg-light rounded\"><br>"
